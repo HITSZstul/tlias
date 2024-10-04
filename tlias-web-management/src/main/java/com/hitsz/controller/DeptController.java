@@ -62,7 +62,7 @@ public class DeptController {
     @DeleteMapping("/depts")
     public Result delete(Integer id) throws IOException {
         System.out.println("根据ID删除部门");
-        System.out.println("ID是"+id);
+        deptService.delete(id);
         return Result.success();
     }
 }

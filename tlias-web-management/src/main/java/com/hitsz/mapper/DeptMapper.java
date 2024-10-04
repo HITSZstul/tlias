@@ -6,10 +6,7 @@ package com.hitsz.mapper;/*
  */
 
 import com.hitsz.pojo.Dept;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -24,5 +21,9 @@ public interface DeptMapper {
     //@Select("select id,name,create_time createTime,update_time updateTime from dept")
     @Select("select * from dept")
     public List<Dept> findAll();
-
+    /*
+    * 占位符号
+    * */
+    @Delete("delete from dept where id = #{id}")
+    void deleteById(Integer id);
 }

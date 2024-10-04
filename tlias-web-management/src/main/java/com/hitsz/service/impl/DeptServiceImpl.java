@@ -21,4 +21,8 @@ public class DeptServiceImpl implements DeptService {
     public List<Dept> list() throws IOException {
         return deptMapper.findAll();
     }
+
+    public void delete(Integer id) {
+        deptMapper.deleteById(id);
+    }
 }
