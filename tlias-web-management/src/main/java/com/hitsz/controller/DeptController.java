@@ -9,9 +9,7 @@ import com.hitsz.pojo.Dept;
 import com.hitsz.pojo.Result;
 import com.hitsz.service.impl.DeptServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -27,5 +25,44 @@ public class DeptController {
         List<Dept> list = deptService.list();
         // 3、响应数据
         return Result.success(list);
+    }
+
+    /*
+    接收请求参数--方式一
+    基于原始的request对象获取id（少用，需要类型转化）
+    */
+//    @DeleteMapping("/depts")
+//    public Result delete(HttpServletRequest request) throws IOException {
+//        System.out.println("根据ID删除部门");
+//        String id = request.getParameter("id");
+//        int id_ = Integer.parseInt(id);
+//        System.out.println("ID是"+id_);
+//        return Result.success();
+//    }
+
+    /*
+    * 方式二：
+    * 通过SpringBoot提供的@RequestParam注解绑定请求参数到方法形参
+    * 此处的id要和前端中的参数名对应相同
+    *
+    * 使用场景：前端传递的参数名与controller方法的形参名不一致
+    * 注意事项：required参数默认是true，即必须传递参数
+    * 若讲required的值修改为false，即对参数传递没有强制要求
+    * */
+//    @DeleteMapping("/depts")
+//    public Result delete(@RequestParam(name = "id",required = false) Integer _id) throws IOException {
+//        System.out.println("根据ID删除部门");
+//        System.out.println("ID是"+_id);
+//        return Result.success();
+//    }
+
+    /*
+    * 方案三：若前端传递的参数名和controller方法形参名字一致，省略@RequestParam
+    * */
+    @DeleteMapping("/depts")
+    public Result delete(Integer id) throws IOException {
+        System.out.println("根据ID删除部门");
+        System.out.println("ID是"+id);
+        return Result.success();
     }
 }
