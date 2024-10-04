@@ -13,7 +13,9 @@ import java.util.List;
 /*部门管理的mapper接口*/
 @Mapper
 public interface DeptMapper {
-    /*查询所有部门
+    /*
+    * 查询所有部门
+    *
     * 以下当当前数据库中的名称与dept对应的变量名，若遵循驼峰命名，可以直接通过在properties文件中配置
     * */
 //    @Results({
@@ -26,6 +28,8 @@ public interface DeptMapper {
 
 
     /*
+    * 删除部门
+    *
     * 占位符号，若此接口方法形参只有一个简单类型参数，在占位符中填写的值可以是任意
     * 可以是id，也可以是afla
     *
@@ -34,4 +38,8 @@ public interface DeptMapper {
     * */
     @Delete("delete from dept where id = #{id}")
     void deleteById(Integer id);
+
+
+    @Insert("insert into dept(name, create_time, update_time) values (#{name},#{createTime},#{updateTime})")
+    void insert(Dept dept);
 }

@@ -26,7 +26,9 @@ public class DeptController {
         // 3、响应数据
         return Result.success(list);
     }
-
+    /*
+    * 删除部门
+    * */
     /*
     接收请求参数--方式一
     基于原始的request对象获取id（少用，需要类型转化）
@@ -65,4 +67,20 @@ public class DeptController {
         deptService.delete(id);
         return Result.success();
     }
+
+
+    /*新增部门*/
+    /*问号后的参数，可以直接通过简单形参接收，如果是json格式的参数，通常
+    * 会使用一个实体对象进行接收。
+    *
+    * {"name":"....."}----->@RequestBody对象
+    *
+    * 规则：JSON的键名与方法形参的属性名相同，并需要使用@RequestBody注解标识*/
+    @PostMapping("/depts")
+    public Result add(@RequestBody Dept dept){
+        System.out.println("新增部门"+dept);
+//        deptService.add(dept);
+        return Result.success();
+    }
+
 }
