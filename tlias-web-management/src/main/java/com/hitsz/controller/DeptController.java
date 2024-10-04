@@ -14,12 +14,15 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
+/*不需要在每个方法上增加路径，只需要在类上为所有方法增加了路径*/
+@RequestMapping("/depts")
 @RestController
 public class DeptController {
     @Autowired
     private DeptServiceImpl deptService;
     /*查询部门*/
-    @RequestMapping(value = "/depts",method = RequestMethod.GET)
+    //@RequestMapping(value = "/depts",method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     //限定当前请求的方式
     public Result list() throws IOException {
         List<Dept> list = deptService.list();
@@ -61,7 +64,7 @@ public class DeptController {
     /*
     * 方案三：若前端传递的参数名和controller方法形参名字一致，省略@RequestParam
     * */
-    @DeleteMapping("/depts")
+    @DeleteMapping
     public Result delete(Integer id) throws IOException {
         System.out.println("根据ID删除部门");
         deptService.delete(id);
@@ -76,11 +79,34 @@ public class DeptController {
     * {"name":"....."}----->@RequestBody对象
     *
     * 规则：JSON的键名与方法形参的属性名相同，并需要使用@RequestBody注解标识*/
-    @PostMapping("/depts")
+    @PostMapping
     public Result add(@RequestBody Dept dept){
         System.out.println("新增部门"+dept);
         deptService.add(dept);
         return Result.success();
     }
 
+
+    /*查询部门
+    *
+    *接收请求参数（路径参数），通过请求URL直接传递参数，通过{...}来标识该路径参数
+    * 需要使用@PathVariable获取路径参数，注意保持{}和下方参数的名字保持一致
+    * 若有多个路径参数，是根据变量名，一一对应下方函数参数的名字，进行参数的传递
+    */
+    @GetMapping("/{id}")
+    public Result getById(@PathVariable Integer id){
+        System.out.println("根据ID查询部门："+id);
+        Dept dept = deptService.getById(id);
+        return Result.success(dept);
+    }
+
+    /*
+    * 修改部门
+    *JSON 数据格式，需要加上注释@RequestBody，名字一一对应
+    * */
+    @PutMapping
+    public Result update(@RequestBody Dept dept){
+        deptService.update(dept);
+        return Result.success();
+    }
 }

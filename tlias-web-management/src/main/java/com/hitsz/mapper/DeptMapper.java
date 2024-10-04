@@ -42,4 +42,14 @@ public interface DeptMapper {
 
     @Insert("insert into dept(name, create_time, update_time) values (#{name},#{createTime},#{updateTime})")
     void insert(Dept dept);
+
+    /*查询部门，根据前端id信息调用SQL语句
+    * 由于id是唯一的，因此直接返回值放置在一个对象中即可
+    * */
+    @Select("select * from dept where id = #{id}")
+    Dept getById(Integer id);
+
+
+    @Update("update dept set name = #{name},update_time = #{updateTime} where id = #{id}")
+    void update(Dept dept);
 }

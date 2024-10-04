@@ -14,4 +14,6 @@ public interface DeptService {
     public List<Dept> list() throws IOException;
     public void add(Dept dept);
     public void delete(Integer id);
+    public Dept getById(Integer id);
+    public void update(Dept dept);
 }
