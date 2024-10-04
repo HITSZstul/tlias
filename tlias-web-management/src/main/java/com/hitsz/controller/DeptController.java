@@ -8,18 +8,22 @@ package com.hitsz.controller;/*
 import com.hitsz.pojo.Dept;
 import com.hitsz.pojo.Result;
 import com.hitsz.service.impl.DeptServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
 
+
 /*不需要在每个方法上增加路径，只需要在类上为所有方法增加了路径
 * 类上的地址 + 方法上的地址 = 将要访问的地址
 * */
+@Slf4j
 @RequestMapping("/depts")
 @RestController
 public class DeptController {
+    //private static final Logger log = LoggerFactory.getLogger(DeptController.class);
     @Autowired
     private DeptServiceImpl deptService;
     /*查询部门*/
@@ -68,7 +72,7 @@ public class DeptController {
     * */
     @DeleteMapping
     public Result delete(Integer id) throws IOException {
-        System.out.println("根据ID删除部门");
+        log.info("根据ID删除部门");
         deptService.delete(id);
         return Result.success();
     }
@@ -83,7 +87,7 @@ public class DeptController {
     * 规则：JSON的键名与方法形参的属性名相同，并需要使用@RequestBody注解标识*/
     @PostMapping
     public Result add(@RequestBody Dept dept){
-        System.out.println("新增部门"+dept);
+        log.info("新增部门"+dept);
         deptService.add(dept);
         return Result.success();
     }
@@ -97,7 +101,7 @@ public class DeptController {
     */
     @GetMapping("/{id}")
     public Result getById(@PathVariable Integer id){
-        System.out.println("根据ID查询部门："+id);
+        log.info("根据ID查询部门："+id);
         Dept dept = deptService.getById(id);
         return Result.success(dept);
     }
@@ -108,6 +112,7 @@ public class DeptController {
     * */
     @PutMapping
     public Result update(@RequestBody Dept dept){
+        log.info("根据id修改部门："+dept);
         deptService.update(dept);
         return Result.success();
     }

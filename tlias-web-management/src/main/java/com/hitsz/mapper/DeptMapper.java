@@ -49,7 +49,10 @@ public interface DeptMapper {
     @Select("select * from dept where id = #{id}")
     Dept getById(Integer id);
 
-    /*在更新数据时，如何做到只想更新某一个或几个字段呢*/
-    @Update("update dept set name = #{name},update_time = #{updateTime} where id = #{id}")
+    /*在更新数据时，如何做到只想更新某一个或几个字段呢----动态SQL
+    * 随着用户输入或外部条件的变化而变化的SQL语句
+    * 推荐在XML文件中
+    * */
+    //@Update("update dept set name = #{name},update_time = #{updateTime} where id = #{id}")
     void update(Dept dept);
 }
