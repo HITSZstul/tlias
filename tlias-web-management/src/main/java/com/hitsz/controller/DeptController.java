@@ -79,7 +79,7 @@ public class DeptController {
     @PostMapping("/depts")
     public Result add(@RequestBody Dept dept){
         System.out.println("新增部门"+dept);
-//        deptService.add(dept);
+        deptService.add(dept);
         return Result.success();
     }
 
