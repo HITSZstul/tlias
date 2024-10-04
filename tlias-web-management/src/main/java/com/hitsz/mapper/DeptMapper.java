@@ -28,6 +28,9 @@ public interface DeptMapper {
     /*
     * 占位符号，若此接口方法形参只有一个简单类型参数，在占位符中填写的值可以是任意
     * 可以是id，也可以是afla
+    *
+    * #{}参数值传递，即预编译，会替换为？安全性能高。
+    * ${}拼接SQL语句，不安全，性能低，在表名，字段名动态设置时候使用
     * */
     @Delete("delete from dept where id = #{id}")
     void deleteById(Integer id);
