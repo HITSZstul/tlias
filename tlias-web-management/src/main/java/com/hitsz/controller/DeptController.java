@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-/*不需要在每个方法上增加路径，只需要在类上为所有方法增加了路径*/
+/*不需要在每个方法上增加路径，只需要在类上为所有方法增加了路径
+* 类上的地址 + 方法上的地址 = 将要访问的地址
+* */
 @RequestMapping("/depts")
 @RestController
 public class DeptController {
