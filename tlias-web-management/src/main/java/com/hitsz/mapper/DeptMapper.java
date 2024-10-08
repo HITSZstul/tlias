@@ -24,7 +24,7 @@ public interface DeptMapper {
 //    })
 // @Select("select id,name,create_time createTime,update_time updateTime from dept")
     @Select("select * from dept")
-    public List<Dept> findAll();
+    List<Dept> findAll();
 
 
     /*

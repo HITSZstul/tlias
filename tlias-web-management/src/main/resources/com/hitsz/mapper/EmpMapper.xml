@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.hitsz.mapper.EmpMapper">
+    <!--进行条件查询-->
+    <select id="getRow" resultType="com.hitsz.pojo.Emp">
+        select emp.*, dept.name deptName
+        from emp left join dept on emp.dept_id = dept.id
+        <!--where关键字：
+        1.会自动根据条件是否成立，生成where关键字
+        2.根据语句是否成立自动去除前面多余的and或者or-->
+        <where>
+            <if test="name!=null and name!='' ">
+                emp.name like concat('%',#{name},'%') and
+            </if>
+            <if test="gender != null">
+                emp.gender = #{gender} and
+            </if>
+            <if test="begin != null and end!=null">
+                entry_date between #{begin} and #{end}
+            </if>
+        </where>
+        order by emp.update_time desc
+    </select>
+</mapper>

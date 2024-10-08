@@ -116,4 +116,10 @@ public class DeptController {
         deptService.update(dept);
         return Result.success();
     }
+    /*
+    * 分页查询，实现员工列表查询
+    * 1 原始方法：指定展示数据条数，第几页
+    * 数据库是将所有的数据全部发送到前端吗？否，根据页数返回一定量的数据
+    * */
+
 }
