@@ -4,9 +4,12 @@ package com.hitsz.service;/*
  *@Description:web-project-actual-combat
  *@version:1.0
  */
+import com.hitsz.pojo.Emp;
 import com.hitsz.pojo.EmpQueryParam;
 import com.hitsz.pojo.PageBean;
 
 public interface EmpService {
     PageBean page(EmpQueryParam empQueryParam);
+
+    void add(Emp emp);
 }

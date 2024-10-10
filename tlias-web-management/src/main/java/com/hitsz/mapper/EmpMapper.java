@@ -7,6 +7,7 @@ package com.hitsz.mapper;/*
 
 import com.hitsz.pojo.Emp;
 import com.hitsz.pojo.EmpQueryParam;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -34,4 +35,8 @@ public interface EmpMapper {
 //            " entry_date between #{start} and #{end} " +
 //            "order by tlias.emp.update_time desc")
     List<Emp> getRow(EmpQueryParam empQueryParam);
+
+    @Insert("insert into emp (username, name, gender, phone, job, salary, image, entry_date, dept_id, create_time, update_time) VALUES " +
+            "(#{username},#{name},#{gender},#{phone},#{job},#{salary},#{image},#{entryDate},#{dept_id},#{createTime},#{updateTime})")
+    void insert(Emp emp);
 }

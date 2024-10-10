@@ -15,6 +15,8 @@ import com.hitsz.service.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -41,5 +43,12 @@ public class EmpServiceImpl implements EmpService {
         * 类的各种返回数据的方法*/
         Page<Emp> p = (Page<Emp>) emp_list;
         return new PageBean(p.getTotal(),p.getResult());
+    }
+
+    @Override
+    public void add(Emp emp) {
+        emp.setCreateTime(LocalDateTime.now());
+        emp.setUpdateTime(LocalDateTime.now());
+        empMapper.insert(emp);
     }
 }

@@ -24,4 +24,6 @@ public class Emp {
 
     //封装部门名称数，与前端保持一致
     private String deptName; //部门名称
+
+    private List<EmpExpr> exprList;
 }
