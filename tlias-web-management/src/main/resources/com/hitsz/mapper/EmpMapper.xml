@@ -3,7 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace = "com.hitsz.mapper.EmpMapper">
-    <!--进行条件查询-->
+    <delete id="deleteById">
+        delete from emp where id in
+        <foreach collection="empIds" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <!--进行条件查询 resultType 的标签作用是将查询结果放置在Emp的类中-->
     <select id="getRow" resultType="com.hitsz.pojo.Emp">
         select emp.*, dept.name deptName
         from emp left join dept on emp.dept_id = dept.id

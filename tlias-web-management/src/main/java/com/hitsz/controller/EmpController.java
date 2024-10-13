@@ -16,6 +16,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -49,6 +51,16 @@ public class EmpController {
     public Result add(@RequestBody Emp emp) {
         log.info("新增员工emp:{}", emp);
         empService.add(emp);
+        return Result.success();
+    }
+
+    /*两种方案接收：
+    * 1.使用数组接收：数组名需要和参数名相同
+    * 2.使用collection接收，需要增加requestParam的注解，一般推荐使用集合，集合的操作方法更多*/
+    @DeleteMapping
+    public Result delete(@RequestParam List<Integer> ids) {
+        log.info("id:{}", ids);
+        empService.delete(ids);
         return Result.success();
     }
 }

@@ -9,6 +9,7 @@ import com.hitsz.pojo.Emp;
 import com.hitsz.pojo.EmpQueryParam;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -36,7 +37,13 @@ public interface EmpMapper {
 //            "order by tlias.emp.update_time desc")
     List<Emp> getRow(EmpQueryParam empQueryParam);
 
-    @Insert("insert into emp (username, name, gender, phone, job, salary, image, entry_date, dept_id, create_time, update_time) VALUES " +
-            "(#{username},#{name},#{gender},#{phone},#{job},#{salary},#{image},#{entryDate},#{dept_id},#{createTime},#{updateTime})")
+    /*希望在获得数据库中自增的id
+    * 是否需要用数据库生成的主键，选择true，
+    * 将获取的数据封装到emp对象的id属性中*/
+    @Options(useGeneratedKeys = true,keyProperty = "id")
+    @Insert("insert into emp (username, name, gender, phone, job, salary, image, entry_date, dept_id, create_time, update_time) VALUES (#{username},#{name},#{gender},#{phone},#{job},#{salary},#{image},#{entryDate},#{deptId},#{createTime},#{updateTime})")
     void insert(Emp emp);
+
+
+    void deleteById(List<Integer> empIds);
 }

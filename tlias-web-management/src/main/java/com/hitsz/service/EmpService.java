@@ -8,8 +8,12 @@ import com.hitsz.pojo.Emp;
 import com.hitsz.pojo.EmpQueryParam;
 import com.hitsz.pojo.PageBean;
 
+import java.util.List;
+
 public interface EmpService {
     PageBean page(EmpQueryParam empQueryParam);
 
     void add(Emp emp);
+
+    void delete(List<Integer> ids);
 }
