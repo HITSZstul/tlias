@@ -12,11 +12,8 @@ import com.hitsz.pojo.Result;
 import com.hitsz.service.EmpService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
 
 @Slf4j
@@ -61,6 +58,20 @@ public class EmpController {
     public Result delete(@RequestParam List<Integer> ids) {
         log.info("id:{}", ids);
         empService.delete(ids);
+        return Result.success();
+    }
+
+    @GetMapping("/{id}")
+    public Result Query(@PathVariable Integer id) {
+        log.info("id:{}", id);
+        Emp emp = empService.query(id);
+        return Result.success(emp);
+    }
+
+    @PutMapping
+    public Result update(@RequestBody Emp emp) {
+        log.info("update emp:{}", emp);
+        empService.update(emp);
         return Result.success();
     }
 }
