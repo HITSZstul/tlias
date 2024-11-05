@@ -6,11 +6,16 @@ package com.hitsz.service.impl;/*
  */
 
 import com.hitsz.mapper.EmpMapper;
+import com.hitsz.mapper.StudentMapper;
+import com.hitsz.pojo.ClazzNumOfStu;
+import com.hitsz.pojo.DegreeInfo;
 import com.hitsz.pojo.JobOption;
 import com.hitsz.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -20,6 +25,10 @@ public class ReportServiceImpl implements ReportService {
 
     @Autowired
     EmpMapper empMapper;
+
+    @Autowired
+    StudentMapper studentMapper;
+
 
     @Override
     public List<Map> empGenderData() {
@@ -67,4 +76,27 @@ public class ReportServiceImpl implements ReportService {
         jobOption.setJobList(jobList);
         return jobOption;
     }
+
+    @Override
+    public List<DegreeInfo> studentDegreeData() {
+        List<DegreeInfo> df = studentMapper.studentDegreeData();
+        System.out.println(df);
+        return df;
+    }
+
+    @Override
+    public ClazzNumOfStu getClazzNumOfStu() {
+        ClazzNumOfStu clazzNumOfStu = new ClazzNumOfStu();
+        List<Map> clazzNumData = studentMapper.getClazzNumOfStu();
+        List<String> listOfClazz = clazzNumData.stream().map(map->{
+            return map.get("className").toString();
+        }).toList();
+        List<Integer> listOfNum = clazzNumData.stream().map(map -> {
+            return Integer.parseInt(map.get("number").toString());
+        }).toList();
+        clazzNumOfStu.setClazzList(listOfClazz);
+        clazzNumOfStu.setDataList(listOfNum);
+        return clazzNumOfStu;
+    }
+
 }

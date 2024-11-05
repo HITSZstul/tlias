@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hitsz.mapper.StudentMapper">
+    <insert id="add" parameterType="com.hitsz.pojo.Student">
+        INSERT INTO student (
+        <trim suffixOverrides=",">
+            <if test="name != null">name,</if>
+            <if test="no != null">no,</if>
+            <if test="gender != null">gender,</if>
+            <if test="phone != null">phone,</if>
+            <if test="idCard != null">id_card,</if>
+            <if test="isCollege != null">is_college,</if>
+            <if test="address != null">address,</if>
+            <if test="degree != null">degree,</if>
+            <if test="graduationDate != null">graduation_date,</if>
+            <if test="clazzId != null">clazz_id,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+        </trim>
+        ) VALUES (
+        <trim suffixOverrides=",">
+            <if test="name != null">#{name},</if>
+            <if test="no != null">#{no},</if>
+            <if test="gender != null">#{gender},</if>
+            <if test="phone != null">#{phone},</if>
+            <if test="idCard != null">#{idCard},</if>
+            <if test="isCollege != null">#{isCollege},</if>
+            <if test="address != null">#{address},</if>
+            <if test="degree != null">#{degree},</if>
+            <if test="graduationDate != null">#{graduationDate},</if>
+            <if test="clazzId != null">#{clazzId},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+        </trim>
+        )
+    </insert>
+    <update id="update">
+        update student
+        <set>
+            <if test="name != null and name!=''"> name = #{name},</if>
+            <if test="no != null">no = #{no},</if>
+            <if test="gender != null">gender = #{gender},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="idCard != null">id_card = #{idCard},</if>
+            <if test="isCollege != null">is_college = #{isCollege},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="degree != null">degree = #{degree},</if>
+            <if test="graduationDate != null">graduation_date = #{graduationDate},</if>
+            <if test="clazzId != null">clazz_id = #{clazzId},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="violationCount != null">violation_count = #{violationCount},</if>
+            <if test="violationScore != null">violation_score = #{violationScore}</if>
+        </set>
+        where id = #{id}
+    </update>
+    <update id="deductPoint">
+        update student
+        <set>
+            violation_count = violation_count+1,
+            violation_score = violation_score + #{score}
+        </set>
+        where id = #{id}
+    </update>
+    <delete id="delectStudentByIds">
+        delete from student where id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="getStuByInfo" resultType="com.hitsz.pojo.Student">
+        select * from student
+        <where>
+            <if test="name!=null and name!='' ">
+                name = #{name} and
+            </if>
+            <if test="degree!=null">
+                degree = #{degree} and
+            </if>
+            <if test="clazzId!=null">
+                clazz_id = #{clazzId}
+            </if>
+        </where>
+    </select>
+    <select id="queryById" resultType="com.hitsz.pojo.Student">
+        select * from student where id = #{id}
+    </select>
+    <select id="studentDegreeData" resultType="com.hitsz.pojo.DegreeInfo">
+        select (case degree
+                    when 1 then '初中'
+                    when 2 then '高中'
+                    when 3 then '大专'
+                    when 4 then '本科'
+                    when 5 then '硕士'
+                    when 6 then '博士'
+                    else 'unknown' end) name
+             , count(*) value
+        from student
+        group by degree
+    </select>
+    <select id="getClazzNumOfStu" resultType="java.util.Map">
+        select clazz.name className, count(*) number from student, clazz
+        where clazz_id = clazz.id
+        group by clazz_id
+    </select>
+</mapper>

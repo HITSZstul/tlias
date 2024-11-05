@@ -6,6 +6,7 @@ package com.hitsz.service;/*
  */
 import com.hitsz.pojo.Emp;
 import com.hitsz.pojo.EmpQueryParam;
+import com.hitsz.pojo.LoginInfo;
 import com.hitsz.pojo.PageBean;
 
 import java.util.List;
@@ -20,4 +21,6 @@ public interface EmpService {
     Emp query(Integer id);
 
     void update(Emp emp);
+
+    LoginInfo login(Emp e);
 }

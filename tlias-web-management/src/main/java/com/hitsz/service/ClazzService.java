@@ -15,4 +15,12 @@ public interface ClazzService {
     PageBean getClazz(ClazzQueryParam clazzQueryParam);
 
     void delete(Integer ids);
+
+    void insert(Clazz clazz);
+
+    Clazz selectById(Integer id);
+
+    void update(Clazz clazz);
+
+    List<Clazz> selectAllClazz();
 }

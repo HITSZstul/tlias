@@ -121,4 +121,14 @@ public class EmpServiceImpl implements EmpService {
             empExprMapper.insertBatch(empExprs);
         }
     }
+
+    @Override
+    public LoginInfo login(Emp e) {
+        Emp emp = empMapper.loginInfo(e);
+        if(emp != null){
+            return new LoginInfo(emp.getId(),emp.getUsername(),emp.getName(),null);
+        }else{
+            return null;
+        }
+    }
 }

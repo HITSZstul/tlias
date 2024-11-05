@@ -112,6 +112,9 @@
             count(0) value
         from emp group by gender
     </select>
+
+    <!--将搜索的结果封装到类中，这里是只需要两个列，即两个属性，因此可以用map来封装
+    这里的属性和值是封装到同一个map，其中键是列名，值是列的值-->
     <select id="getJobData" resultType="java.util.Map">
         select
             (case job when 1 then '讲师'
@@ -123,5 +126,8 @@
             count(0) poscount
         from emp
         group by job
+    </select>
+    <select id="loginInfo" resultType="com.hitsz.pojo.Emp">
+        select * from emp where username = #{username} and password = #{password}
     </select>
 </mapper>

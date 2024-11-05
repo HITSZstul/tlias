@@ -5,6 +5,8 @@ package com.hitsz.service;/*
  *@version:1.0
  */
 
+import com.hitsz.pojo.ClazzNumOfStu;
+import com.hitsz.pojo.DegreeInfo;
 import com.hitsz.pojo.JobOption;
 
 import java.util.List;
@@ -15,4 +17,8 @@ public interface ReportService {
     List<Map> empGenderData() ;
 
     JobOption empJobData();
+
+    List<DegreeInfo> studentDegreeData();
+
+    ClazzNumOfStu getClazzNumOfStu();
 }

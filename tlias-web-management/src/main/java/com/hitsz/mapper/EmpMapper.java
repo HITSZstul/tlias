@@ -8,6 +8,7 @@ package com.hitsz.mapper;/*
 import com.hitsz.pojo.Emp;
 import com.hitsz.pojo.EmpQueryParam;
 import com.hitsz.pojo.JobOption;
+import com.hitsz.pojo.LoginInfo;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -54,4 +55,7 @@ public interface EmpMapper {
 
     @MapKey("name")
     List<Map> getGender();
+
+
+    Emp loginInfo(Emp e);
 }

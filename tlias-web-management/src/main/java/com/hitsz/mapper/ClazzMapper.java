@@ -14,8 +14,16 @@ import java.util.List;
 
 @Mapper
 public interface ClazzMapper {
-
+    /*实现分页查询 clazzQueryParam中保存的是 具有page和pageSize属性的，这些将在service中处理*/
     List<Clazz> getClazz(ClazzQueryParam clazzQueryParam);
 
-    void deleteById(Integer ids);
+    void deleteById(Integer id);
+
+    void insert(Clazz clazz);
+
+    Clazz SelectById(Integer id);
+
+    void update(Clazz clazz);
+
+    List<Clazz> getAllClazz();
 }
